@@ -1,0 +1,13 @@
+
+dados <- read.csv("E:\\Users\\idrs\\Desktop\\DetalhesdeÁlbuns.csv")
+dframe <- data.frame(dados)
+
+#Media
+mean(dframe$Qnt..de.Ã.lbuns.Vendidos)
+
+#Desvio Padrao
+sd(dframe$Qnt..de.Ã.lbuns.Vendidos)
+
+#Moda
+mode(dframe$Qnt..de.Ã.lbuns.Vendidos)
+
