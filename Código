@@ -11,3 +11,12 @@ sd(dframe$Qnt..de.Ã.lbuns.Vendidos)
 #Moda
 mode(dframe$Qnt..de.Ã.lbuns.Vendidos)
 
+#artistas = c(1, 2, 3)
+#artisitas = c(1, 2, 3)
+#print(artistas[1])
+
+#for (x in 26:42) {
+  
+#}
+#oi = "kkkkk"
+#print(oi)
