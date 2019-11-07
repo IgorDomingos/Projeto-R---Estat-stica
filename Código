@@ -1,5 +1,4 @@
-
-dados <- read.csv("E:\\Users\\idrs\\Desktop\\DetalhesdeÁlbuns.csv")
+dados <- read.csv("C:\\Users\\idrs\\Desktop\\Projeto_Estatistica\\Detalhes de Albuns.csv")
 dframe <- data.frame(dados)
 
 #Media
@@ -16,7 +15,15 @@ mode(dframe$Qnt..de.Ã.lbuns.Vendidos)
 #print(artistas[1])
 
 #for (x in 26:42) {
-  
+
 #}
 #oi = "kkkkk"
 #print(oi)
+#Segunda Questão
+#Fizemos um "array" com os artistas que lançaram discos em 2019 (apagando os nomes repetidos)
+artistas19 <- unique(dframe$Artista[26:41])
+print(artistas19)
+artistas18 <- unique(dframe$Artista[1:25])
+print(artistas18)
+for (x in 1:length(artis))
+for (x in 1:len)
