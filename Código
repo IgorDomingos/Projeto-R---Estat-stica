@@ -1,24 +1,34 @@
+install.packages("stringr")
+#(1)Baixar a planilha: 
+#Baixamos a planiha utilizando o comando "read.csv()"
 dados <- read.csv("E:\\Users\\idrs\\Desktop\\DetalhesdeÁlbuns.csv")
 dframe <- data.frame(dados)
 
-#(2)
-#Media
+#(2) Calcular média, desvio padrão e moda da "Quantidade de Álbuns vendidos"
+
+#Média
+#Para calcular a média foi utilizada uma função pronta do Rstudio "mean()" que calcula a média.
 media <- mean(dframe$Qnt..de.Ã.lbuns.Vendidos)
 print(media)
 
 #Desvio Padrao
+#Para calcular o desvio padão foi utilizada uma função pronta do Rstudio "sd()" que calcula o desvio padrão.
 desvio <- sd(dframe$Qnt..de.Ã.lbuns.Vendidos)
 print(desvio)
 
 #Moda
+#Para calcular a moda foi implementada uma função que, usando o comando "table()", verifica a quantidade de vezes que
+# determinado número aparece... caso a quantidade de vezes que cada número aparece for igual a 1, não existe moda, se
+# a quantidade de vezes que um determinado número aparece for maior que a dos outros, este número será a moda.
 quantVezes = 0;
 moda = 0;
 for(i in 1:41){
-  if(table(dframe$Qnt..de.Albuns.Vendidos[i]) > quantVezes){
-    quantVezes <- table(dframe$Qnt..de.Albuns.Vendidos[i])
-    moda <- dframe$Qnt..de.Albuns.Vendidos[i]
+  if(table(dframe$Qnt..de.Ã.lbuns.Vendidos[i]) > quantVezes){
+    quantVezes <- table(dframe$Qnt..de.Ã.lbuns.Vendidos[i])
+    moda <- dframe$Qnt..de.Ã.lbuns.Vendidos[i]
   }
 }
+print(moda)
 if(moda == 1){
   print(moda)
 } else {
@@ -35,14 +45,104 @@ for(i in 1:length(artistas18)){
 }
 
 #(4)
-match("TWICE", dframe$Artista)
-dframe$Artista  %in% "TWICE"
-match(dframe$Artista  %in% "TWICE", TRUE)
-match(dframe$Artista, "TWICE")
-print(dframe$Artista)
-sd(dframe$Qnt..de.Albuns.Vendidos)
-for(i in 1:41){
-  for(j in 1:41){
-    
+# 
+artistas4 <- unique(dframe$Artista)
+length(artistas4)
+aux = 999999999999999
+nome <- ""
+vetor = NULL
+for (i in 1:length(artistas4)) {
+  pos = 1
+  for (j in 1:41) {
+    if (dframe$Artista[j] == artistas4[i]) {
+      vetor[pos] <- c(dframe$Qnt..de.Ã.lbuns.Vendidos[j])
+      pos = pos + 1
+    }
+  }
+  if (pos > 2) {
+    menorSD <- sd(vetor)
+    if (menorSD < aux) {
+      aux = menorSD
+      nome <- artistas4[i]
+    }
+  }
+  vetor = NULL
+}
+print(nome)
+
+#(5)
+maior <- max(dframe$Qnt..de.Ã.lbuns.Vendidos)
+menor <- min(dframe$Qnt..de.Ã.lbuns.Vendidos)
+nomes <- c("oi", "olá")
+for (i in 1:41) {
+  if (maior == (dframe$Qnt..de.Ã.lbuns.Vendidos[i])) {
+    nomes[1] <- c(dframe$Artista[i])
+    print(dframe$Ã.lbum[i])
+    print(dframe$Artista[i])
+  }
+  if (menor == (dframe$Qnt..de.Ã.lbuns.Vendidos[i])) {
+    nomes[2] <- c(dframe$Artista[i])
+    print(dframe$Ã.lbum[i])
+    print(dframe$Artista[i])
   }
 }
+print(nomes[1])
+print(nomes[2])
+
+#(6)
+qnt = 1
+ListaNomes = NULL
+for (i in 1:length(artistas4)) {
+  pos = 1
+  for (j in 1:41) {
+    if (dframe$Artista[j] == artistas4[i]) {
+#      vetor[pos] <- c(dframe$Qnt..de.Ã.lbuns.Vendidos[j])
+      pos = pos + 1
+    }
+  }
+  if (pos == 2) {
+#    nome <- artistas4[i]
+    ListaNomes[qnt] <- c(artistas4[i])
+    print(ListaNomes[qnt])
+#    print(nome)
+    qnt = qnt + 1
+  }
+}
+print(ListaNomes)
+
+
+#(7)
+Empresas0 <- unique(dframe$Empresa)
+print(Empresas0)
+QntArtistasEmp = NULL
+x = 0
+for (i in 1:length(Empresas)) {
+  for (w in 1:(length(artistas4))) {
+    if (Empresas0[i] == Empresas0[w]) {
+      x = x + 1
+      QntArtistasEmp[i] = x
+    }
+  }
+  x = 0
+}
+print(QntArtistasEmp)
+nome <- "oi"
+for (i in 1:length(Empresas0)) {
+  for (w in 1:(length(artistas4) - 1)) {
+    if (QntArtistasEmp[w] > QntArtistasEmp[w+1]) {
+      x = QntArtistasEmp[w]
+      QntArtistasEmp[w] = QntArtistasEmp[w+1]
+      QntArtistasEmp[w+1] = x
+      nome <- Empresas0[w]
+      Empresas0[w] = Empresas0[w + 1]
+      Empresas0[w+1] <- nome
+    }
+  }
+}
+print(Empresas0)
+print(QntArtistasEmp)
+DFempresas <- data.frame(
+  Empresas = Empresas0,
+  Artistas = QntArtistasEmp
+)
+
