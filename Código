@@ -73,25 +73,29 @@ print(nome)
 #(5)
 maior <- max(dframe$Qnt..de.Ã.lbuns.Vendidos)
 menor <- min(dframe$Qnt..de.Ã.lbuns.Vendidos)
-nomes <- c("oi", "olá")
 for (i in 1:41) {
   if (maior == (dframe$Qnt..de.Ã.lbuns.Vendidos[i])) {
-    nomes[1] <- c(dframe$Artista[i])
-    print(dframe$Ã.lbum[i])
-    print(dframe$Artista[i])
+    pos1 = i
+    print(pos1)
   }
   if (menor == (dframe$Qnt..de.Ã.lbuns.Vendidos[i])) {
-    nomes[2] <- c(dframe$Artista[i])
-    print(dframe$Ã.lbum[i])
-    print(dframe$Artista[i])
+    pos2 = i
   }
 }
-print(nomes[1])
-print(nomes[2])
+maior1 <- (dframe$Ã.lbum[pos1])
+maior2 <- (dframe$Artista[pos1])
+menor1 <- (dframe$Ã.lbum[pos2])
+menor2 <- (dframe$Artista[pos2])
+DFAlbuns <- data.frame(
+  Álbum = c(maior1, menor1),
+  Artista = c(maior2, menor2)
+)
+print(paste(dframe$Ã.lbum[pos1], maior2, sep = " - "))
+print(paste(menor1, menor2, sep = " - "))
 
 #(6)
 qnt = 1
-ListaNomes = NULL
+ListaNomes = "NA"
 for (i in 1:length(artistas4)) {
   pos = 1
   for (j in 1:41) {
@@ -109,7 +113,6 @@ for (i in 1:length(artistas4)) {
   }
 }
 print(ListaNomes)
-
 
 #(7)
 Empresas0 <- unique(dframe$Empresa)
@@ -145,4 +148,6 @@ DFempresas <- data.frame(
   Empresas = Empresas0,
   Artistas = QntArtistasEmp
 )
+
+#(8)
 
