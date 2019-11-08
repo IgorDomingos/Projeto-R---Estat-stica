@@ -1,29 +1,48 @@
-dados <- read.csv("C:\\Users\\idrs\\Desktop\\Projeto_Estatistica\\Detalhes de Albuns.csv")
+dados <- read.csv("E:\\Users\\idrs\\Desktop\\DetalhesdeÁlbuns.csv")
 dframe <- data.frame(dados)
 
+#(2)
 #Media
-mean(dframe$Qnt..de.Ã.lbuns.Vendidos)
+media <- mean(dframe$Qnt..de.Ã.lbuns.Vendidos)
+print(media)
 
 #Desvio Padrao
-sd(dframe$Qnt..de.Ã.lbuns.Vendidos)
+desvio <- sd(dframe$Qnt..de.Ã.lbuns.Vendidos)
+print(desvio)
 
 #Moda
-mode(dframe$Qnt..de.Ã.lbuns.Vendidos)
+quantVezes = 0;
+moda = 0;
+for(i in 1:41){
+  if(table(dframe$Qnt..de.Albuns.Vendidos[i]) > quantVezes){
+    quantVezes <- table(dframe$Qnt..de.Albuns.Vendidos[i])
+    moda <- dframe$Qnt..de.Albuns.Vendidos[i]
+  }
+}
+if(moda == 1){
+  print(moda)
+} else {
+  print("Não possui moda")
+}
 
-#artistas = c(1, 2, 3)
-#artisitas = c(1, 2, 3)
-#print(artistas[1])
-
-#for (x in 26:42) {
-
-#}
-#oi = "kkkkk"
-#print(oi)
-#Segunda Questão
-#Fizemos um "array" com os artistas que lançaram discos em 2019 (apagando os nomes repetidos)
+#(3)
 artistas19 <- unique(dframe$Artista[26:41])
-print(artistas19)
 artistas18 <- unique(dframe$Artista[1:25])
-print(artistas18)
-for (x in 1:length(artis))
-for (x in 1:len)
+for(i in 1:length(artistas18)){
+  if(artistas18[i] %in% artistas19){
+    print(artistas18[i])
+  }
+}
+
+#(4)
+match("TWICE", dframe$Artista)
+dframe$Artista  %in% "TWICE"
+match(dframe$Artista  %in% "TWICE", TRUE)
+match(dframe$Artista, "TWICE")
+print(dframe$Artista)
+sd(dframe$Qnt..de.Albuns.Vendidos)
+for(i in 1:41){
+  for(j in 1:41){
+    
+  }
+}
