@@ -1,0 +1,56 @@
+
+#(5) Álbum que mais vendeu e álbum que menos vendeu
+# Inicialmente criamos duas variáveis: "maior" que, com o uso da função "max", pega o maior valor dentre a quantidade de álbuns vendidos e
+# "menor" que, com o uso da função "min", pega o menor valor dentre a quantidade de álbuns vendidos.
+
+if (ano == 2018) {
+  maior <- max(dframe$Qnt..de.Albuns.Vendidos[1:25])
+  menor <- min(dframe$Qnt..de.Albuns.Vendidos[1:25])
+  for (i in 1:41) {
+    if (maior == (dframe$Qnt..de.Albuns.Vendidos[i])) {
+      pos1 = i
+      print(pos1)
+    }
+    if (menor == (dframe$Qnt..de.Albuns.Vendidos[i])) {
+      pos2 = i
+    }
+  }
+  maior1 <- (dframe$Album[pos1])
+  maior2 <- (dframe$Artista[pos1])
+  menor1 <- (dframe$Album[pos2])
+  menor2 <- (dframe$Artista[pos2])
+  Álbum[1] <- as.character(maior1)
+  Álbum[2] <- as.character(menor1)
+  Artista[1] <- as.character(maior2)
+  Artista[2] <- as.character(menor2)
+  DFAlbuns <- data.frame(
+    Álbum ,
+    Artista
+  )
+  print(DFAlbuns)
+} else {
+  maior <- max(dframe$Qnt..de.Albuns.Vendidos[26:41])
+  menor <- min(dframe$Qnt..de.Albuns.Vendidos[26:41])
+  for (i in 1:41) {
+    if (maior == (dframe$Qnt..de.Albuns.Vendidos[i])) {
+      pos1 = i
+      print(pos1)
+    }
+    if (menor == (dframe$Qnt..de.Albuns.Vendidos[i])) {
+      pos2 = i
+    }
+  }
+  maior1 <- (dframe$Album[pos1])
+  maior2 <- (dframe$Artista[pos1])
+  menor1 <- (dframe$Album[pos2])
+  menor2 <- (dframe$Artista[pos2])
+  Álbum[1] <- as.character(maior1)
+  Álbum[2] <- as.character(menor1)
+  Artista[1] <- as.character(maior2)
+  Artista[2] <- as.character(menor2)
+  DFAlbuns <- data.frame(
+    Álbum ,
+    Artista
+  )
+  print(DFAlbuns)
+}
