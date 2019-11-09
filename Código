@@ -55,7 +55,7 @@ for(i in 1:length(artistas18)){
 artistas4 <- unique(dframe$Artista)
 length(artistas4)
 aux = 999999999999999
-nome <- ""
+nome <- " "
 vetor = NULL
 for (i in 1:length(artistas4)) {
   pos = 1
@@ -94,28 +94,32 @@ maior1 <- (dframe$Ã.lbum[pos1])
 maior2 <- (dframe$Artista[pos1])
 menor1 <- (dframe$Ã.lbum[pos2])
 menor2 <- (dframe$Artista[pos2])
+Álbum[1] <- as.character(maior1)
+Álbum[2] <- as.character(menor1)
+Artista[1] <- as.character(maior2)
+Artista[2] <- as.character(menor2)
 DFAlbuns <- data.frame(
-  Álbum = c(maior1, menor1),
-  Artista = c(maior2, menor2)
+  Álbum ,
+  Artista
 )
 print(paste(dframe$Ã.lbum[pos1], maior2, sep = " - "))
 print(paste(menor1, menor2, sep = " - "))
 
 #(6)
 qnt = 1
-ListaNomes = "NA"
+ListaNomes <- " "
 for (i in 1:length(artistas4)) {
   pos = 1
   for (j in 1:41) {
     if (dframe$Artista[j] == artistas4[i]) {
-#      vetor[pos] <- c(dframe$Qnt..de.Ã.lbuns.Vendidos[j])
+      #      vetor[pos] <- c(dframe$Qnt..de.Ã.lbuns.Vendidos[j])
       pos = pos + 1
     }
   }
   if (pos == 2) {
-#    nome <- artistas4[i]
-    ListaNomes[qnt] <- c(artistas4[i])
-    print(ListaNomes[qnt])
+    nome <- artistas4[i]
+    ListaNomes[qnt] <- as.character(nome)
+#    print(ListaNomes[qnt])
 #    print(nome)
     qnt = qnt + 1
   }
@@ -126,36 +130,44 @@ print(ListaNomes)
 Empresas0 <- unique(dframe$Empresa)
 print(Empresas0)
 QntArtistasEmp = NULL
+Empresa1 <- " "
 x = 0
-for (i in 1:length(Empresas)) {
-  for (w in 1:(length(artistas4))) {
-    if (Empresas0[i] == Empresas0[w]) {
-      x = x + 1
-      QntArtistasEmp[i] = x
+for (w in 1:(length(artistas4))) {
+  for (y in 1:41) {
+    if (artistas4[w] == (dframe$Artista[y])) {
+      Empresa1[w] <- as.character(dframe$Empresa[y])
     }
   }
+}
+DFEmpresas <- data.frame(
+  Empresa1 ,
+  artistas4
+)
+for (w in 1:length(Empresas0)) {
+  for (y in 1:length(Empresa1)) {
+    if (Empresas0[w] == Empresa1[y]) {
+      x = x + 1
+    }
+  }
+  QntArtistasEmp[w] <- c(x)
   x = 0
 }
-print(QntArtistasEmp)
-nome <- "oi"
+DFOUTRO <- data.frame(Empresas0, QntArtistasEmp)
 for (i in 1:length(Empresas0)) {
-  for (w in 1:(length(artistas4) - 1)) {
+  for (w in 1:(length(QntArtistasEmp) - 1)) {
     if (QntArtistasEmp[w] > QntArtistasEmp[w+1]) {
-      x = QntArtistasEmp[w]
-      QntArtistasEmp[w] = QntArtistasEmp[w+1]
-      QntArtistasEmp[w+1] = x
-      nome <- Empresas0[w]
-      Empresas0[w] = Empresas0[w + 1]
-      Empresas0[w+1] <- nome
+      x <- QntArtistasEmp[w]
+      QntArtistasEmp[w] <- c(QntArtistasEmp[w+1])
+      QntArtistasEmp[w+1] <- c(x)
+      nome <- as.character(Empresas0[w])
+      Empresas0[w] <- as.character(Empresas0[w + 1])
+      Empresas0[w+1] <- as.character(nome)
     }
   }
 }
+DFOUTRO <- data.frame(Empresas0, QntArtistasEmp)
 print(Empresas0)
 print(QntArtistasEmp)
-DFempresas <- data.frame(
-  Empresas = Empresas0,
-  Artistas = QntArtistasEmp
-)
+
 
 #(8)
-
