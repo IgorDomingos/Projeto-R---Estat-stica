@@ -1,4 +1,3 @@
-install.packages("stringr")
 #(1)Baixar a planilha: 
 #Baixamos a planiha utilizando o comando "read.csv()"
 dados <- read.csv("C:\\Users\\idrs\\Desktop\\DetalhesdeÁlbuns.csv")
