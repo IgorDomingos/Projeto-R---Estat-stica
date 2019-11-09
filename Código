@@ -35,7 +35,10 @@ if(moda == 1){
   print("Não possui moda")
 }
 
-#(3)
+#(3) Artistas que lançaram álbuns nos dois anos
+# Aqui foram feitos dois arrays: um com artistas que lançaram álbuns em 2019 e outro com os que lançaram álbuns em 2018. Ambos os arrays
+# foram feitos com o comando "unique" para que não tivessem artistas repetidos. Depois, com dois "fors", fizemos uma "varredura" procurando
+# e printando os artistas que estavam presentes nos dois arrays.
 artistas19 <- unique(dframe$Artista[26:41])
 artistas18 <- unique(dframe$Artista[1:25])
 for(i in 1:length(artistas18)){
