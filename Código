@@ -1,3 +1,4 @@
+# Igor Domingos da Rocha e Silva - idrs / José Henrique Fernandes Silva - jhfs
 #(1)Baixar a planilha: 
 #Baixamos a planiha utilizando o comando "read.csv()"
 dados <- read.csv("C:\\Users\\idrs\\Desktop\\DetalhesdeÁlbuns.csv")
