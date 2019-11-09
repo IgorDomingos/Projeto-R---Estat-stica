@@ -1,19 +1,19 @@
 # Igor Domingos da Rocha e Silva - idrs / José Henrique Fernandes Silva - jhfs
 #(1)Baixar a planilha: 
 #Baixamos a planiha utilizando o comando "read.csv()"
-dados <- read.csv("C:\\Users\\idrs\\Desktop\\DetalhesdeÁlbuns.csv")
+dados <- read.csv("C:\\Users\\idrs\\Downloads\\Detalhes de Albuns - Página1.csv")
 dframe <- data.frame(dados)
 
 #(2) Calcular média, desvio padrão e moda da "Quantidade de Álbuns vendidos"
 
 #Média
 #Para calcular a média foi utilizada uma função pronta do Rstudio "mean()" que calcula a média.
-media <- mean(dframe$Qnt..de.Ã.lbuns.Vendidos)
+media <- mean(dframe$Qnt..de.Albuns.Vendidos)
 print(media)
 
 #Desvio Padrao
 #Para calcular o desvio padão foi utilizada uma função pronta do Rstudio "sd()" que calcula o desvio padrão.
-desvio <- sd(dframe$Qnt..de.Ã.lbuns.Vendidos)
+desvio <- sd(dframe$Qnt..de.Albuns.Vendidos)
 print(desvio)
 
 #Moda
@@ -23,9 +23,9 @@ print(desvio)
 quantVezes = 0;
 moda = 0;
 for(i in 1:41){
-  if(table(dframe$Qnt..de.Ã.lbuns.Vendidos[i]) > quantVezes){
-    quantVezes <- table(dframe$Qnt..de.Ã.lbuns.Vendidos[i])
-    moda <- dframe$Qnt..de.Ã.lbuns.Vendidos[i]
+  if(table(dframe$Qnt..de.Albuns.Vendidos[i]) > quantVezes){
+    quantVezes <- table(dframe$Qnt..de.Albuns.Vendidos[i])
+    moda <- dframe$Qnt..de.Albuns.Vendidos[i]
   }
 }
 if(moda == 1){
@@ -53,7 +53,6 @@ for(i in 1:length(artistas18)){
 # um vetor, posteriormente, com o comando "sd" pegamos o desvio padrão desse vetor. Fazemos esse processo para cada artista e por fim pegamos
 # o nome do artista que possuir o menor desvio padrão e printamos ele.
 artistas4 <- unique(dframe$Artista)
-length(artistas4)
 aux = Inf
 nome <- " "
 vetor = NULL
@@ -61,7 +60,7 @@ for (i in 1:length(artistas4)) {
   pos = 1
   for (j in 1:41) {
     if (dframe$Artista[j] == artistas4[i]) {
-      vetor[pos] <- c(dframe$Qnt..de.Ã.lbuns.Vendidos[j])
+      vetor[pos] <- c(dframe$Qnt..de.Albuns.Vendidos[j])
       pos = pos + 1
     }
   }
@@ -81,20 +80,20 @@ print(nome)
 # "menor" que, com o uso da função "min", pega o menor valor dentre a quantidade de álbuns vendidos.
 
 #if (ano == 2018) {
-  maior <- max(dframe$Qnt..de.Ã.lbuns.Vendidos)
-  menor <- min(dframe$Qnt..de.Ã.lbuns.Vendidos)
+  maior <- max(dframe$Qnt..de.Albuns.Vendidos)
+  menor <- min(dframe$Qnt..de.Albuns.Vendidos)
   for (i in 1:41) {
-    if (maior == (dframe$Qnt..de.Ã.lbuns.Vendidos[i])) {
+    if (maior == (dframe$Qnt..de.Albuns.Vendidos[i])) {
       pos1 = i
       print(pos1)
     }
-    if (menor == (dframe$Qnt..de.Ã.lbuns.Vendidos[i])) {
+    if (menor == (dframe$Qnt..de.Albuns.Vendidos[i])) {
       pos2 = i
     }
   }
-  maior1 <- (dframe$Ã.lbum[pos1])
+  maior1 <- (dframe$Album[pos1])
   maior2 <- (dframe$Artista[pos1])
-  menor1 <- (dframe$Ã.lbum[pos2])
+  menor1 <- (dframe$Album[pos2])
   menor2 <- (dframe$Artista[pos2])
   Álbum[1] <- as.character(maior1)
   Álbum[2] <- as.character(menor1)
@@ -104,7 +103,7 @@ print(nome)
     Álbum ,
     Artista
   )
-  print(paste(dframe$Ã.lbum[pos1], maior2, sep = " - "))
+  print(paste(dframe$Album[pos1], maior2, sep = " - "))
   print(paste(menor1, menor2, sep = " - "))
 #}
 #(6)
@@ -187,7 +186,7 @@ for(i in 1:length(artistasAux)){
   for(j in 1:length(dframe$Artista)){
     if(artistasAux[i] == dframe$Artista[j]){
       auxQnt = auxQnt + 1
-      auxVendas = auxVendas + dframe$Qnt..de.Ã.lbuns.Vendidos[j]
+      auxVendas = auxVendas + dframe$Qnt..de.Albuns.Vendidos[j]
     }
   }
   if(auxQnt > primeiroAux){
@@ -225,10 +224,10 @@ AlbumEmp <- " "
 for (i in 1:length(Empresas0)) {
   for (y in 1:41) {
     if (Empresas0[i] == (dframe$Empresa[y])) {
-      if (MaiorAlbumEmp[i] < dframe$Qnt..de.Ã.lbuns.Vendidos[y]) {
-        MaiorAlbumEmp[i] <- c(dframe$Qnt..de.Ã.lbuns.Vendidos[y])
+      if (MaiorAlbumEmp[i] < dframe$Qnt..de.Albuns.Vendidos[y]) {
+        MaiorAlbumEmp[i] <- c(dframe$Qnt..de.Albuns.Vendidos[y])
         MaiorArtistaEmp[i] <- as.character(dframe$Artista[y])
-        AlbumEmp[i] <- as.character(dframe$Ã.lbum[y])
+        AlbumEmp[i] <- as.character(dframe$Album[y])
       }
     }
   }
