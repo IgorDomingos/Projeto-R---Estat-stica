@@ -1,56 +1,44 @@
 
-#(5) Álbum que mais vendeu e álbum que menos vendeu
-# Inicialmente criamos duas variáveis: "maior" que, com o uso da função "max", pega o maior valor dentre a quantidade de álbuns vendidos e
-# "menor" que, com o uso da função "min", pega o menor valor dentre a quantidade de álbuns vendidos.
+#(2) Calcular média, desvio padrão e moda da "Quantidade de Álbuns vendidos"
 
-if (ano == 2018) {
-  maior <- max(dframe$Qnt..de.Albuns.Vendidos[1:25])
-  menor <- min(dframe$Qnt..de.Albuns.Vendidos[1:25])
-  for (i in 1:41) {
-    if (maior == (dframe$Qnt..de.Albuns.Vendidos[i])) {
-      pos1 = i
-      print(pos1)
-    }
-    if (menor == (dframe$Qnt..de.Albuns.Vendidos[i])) {
-      pos2 = i
+#Média
+#Para calcular a média foi utilizada uma função pronta do Rstudio "mean()" que calcula a média.
+media <- mean(dframe$Qnt..de.Albuns.Vendidos)
+print(media)
+
+#Desvio Padrao
+#Para calcular o desvio padão foi utilizada uma função pronta do Rstudio "sd()" que calcula o desvio padrão.
+desvio <- sd(dframe$Qnt..de.Albuns.Vendidos)
+print(desvio)
+
+#Moda
+#Para calcular a moda foi implementada uma função que, usando o comando "table()", verifica a quantidade de vezes que
+# determinado número aparece... caso a quantidade de vezes que cada número aparece for igual a 1, não existe moda, se
+# a quantidade de vezes que um determinado número aparece for maior que a dos outros, este número será a moda.
+quantVezes <- NULL;
+QntAlbuns <- unique(dframe$Qnt..de.Albuns.Vendidos);
+moda = 0;
+x = 0
+for(i in 1:length(QntAlbuns)){
+  for (y in 1:41) {
+    if (QntAlbuns[i] == (dframe$Qnt..de.Albuns.Vendidos[y])) {
+      x = x + 1
     }
   }
-  maior1 <- (dframe$Album[pos1])
-  maior2 <- (dframe$Artista[pos1])
-  menor1 <- (dframe$Album[pos2])
-  menor2 <- (dframe$Artista[pos2])
-  Álbum[1] <- as.character(maior1)
-  Álbum[2] <- as.character(menor1)
-  Artista[1] <- as.character(maior2)
-  Artista[2] <- as.character(menor2)
-  DFAlbuns <- data.frame(
-    Álbum ,
-    Artista
-  )
-  print(DFAlbuns)
+  quantVezes[i] <- c(x)
+  x = 0
+}
+aux = quantVezes[1]
+moda = 0
+mod = 0
+for (i in 2:length(QntAlbuns)) {
+  if (aux < quantVezes[i]) {
+    moda = QntAlbuns[i]
+    mod = 1
+  }
+}
+if(mod == 1){ 
+  print(moda)
 } else {
-  maior <- max(dframe$Qnt..de.Albuns.Vendidos[26:41])
-  menor <- min(dframe$Qnt..de.Albuns.Vendidos[26:41])
-  for (i in 1:41) {
-    if (maior == (dframe$Qnt..de.Albuns.Vendidos[i])) {
-      pos1 = i
-      print(pos1)
-    }
-    if (menor == (dframe$Qnt..de.Albuns.Vendidos[i])) {
-      pos2 = i
-    }
-  }
-  maior1 <- (dframe$Album[pos1])
-  maior2 <- (dframe$Artista[pos1])
-  menor1 <- (dframe$Album[pos2])
-  menor2 <- (dframe$Artista[pos2])
-  Álbum[1] <- as.character(maior1)
-  Álbum[2] <- as.character(menor1)
-  Artista[1] <- as.character(maior2)
-  Artista[2] <- as.character(menor2)
-  DFAlbuns <- data.frame(
-    Álbum ,
-    Artista
-  )
-  print(DFAlbuns)
+  print("Não existe moda")
 }
