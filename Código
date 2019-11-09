@@ -47,8 +47,11 @@ for(i in 1:length(artistas18)){
   }
 }
 
-#(4)
-# 
+#(4) Artista com o menor desvio padrão com relação a quantidade de álbuns vendidos
+# Aqui iniciamos um vetor "artistas4", com o auxílio do comando "unique", para que o vetor tivesse o nome de todos os artistas, mas sem
+# repetições, criamos uma variável auxiliar e nos dois "fors" vamos artista por artista pegando o números de álbuns vendidos e colocando em
+# um vetor, posteriormente, com o comando "sd" pegamos o desvio padrão desse vetor. Fazemos esse processo para cada artista e por fim pegamos
+# o nome do artista que possuir o menor desvio padrão e printamos ele.
 artistas4 <- unique(dframe$Artista)
 length(artistas4)
 aux = 999999999999999
@@ -73,7 +76,9 @@ for (i in 1:length(artistas4)) {
 }
 print(nome)
 
-#(5)
+#(5) Álbum que mais vendeu e álbum que menos vendeu
+# Inicialmente criamos duas variáveis: "maior" que, com o uso da função "max", pega o maior valor dentre a quantidade de álbuns vendidos e
+# "menor" que, com o uso da função "min", pega o menor valor dentre a quantidade de álbuns vendidos.
 maior <- max(dframe$Qnt..de.Ã.lbuns.Vendidos)
 menor <- min(dframe$Qnt..de.Ã.lbuns.Vendidos)
 for (i in 1:41) {
