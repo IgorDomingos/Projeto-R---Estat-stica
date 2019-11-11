@@ -1,4 +1,4 @@
-# Igor Domingos da Rocha e Silva - idrs / José Henrique Fernandes Silva - jhfs
+# Igor Domingos da Rocha e Silva - (idrs) / José Henrique Fernandes Silva - (jhfs)
 #(1)Baixar a planilha: 
 #Baixamos a planiha utilizando o comando "read.csv()"
 dados <- read.csv("C:\\Users\\idrs\\Downloads\\Detalhes de Albuns - Página1.csv")
@@ -165,7 +165,7 @@ quest5 <- function(ano){
   }
 }
 print(quest5(scan()))
-
+2019
 
 #(6) Lista com artistas que só aparecem uma vez na planiha
 # Nesta questão iniciamos um vetor "ListaNomes" e com o auxílio do vetor "artistas4" da questão 4
@@ -190,7 +190,7 @@ quest6 <- function(){
       qnt = qnt + 1
     }
   }
-#  list(ListaNomes)
+  #  list(ListaNomes)
   return(list(ListaNomes))
 }
 print(quest6())
@@ -244,119 +244,151 @@ DFEmpresas <- data.frame(EMPRESA = Empresas0, Qnt.ARTISTAS = QntArtistasEmp)
 print(DFEmpresas)
 
 
-#(8)
+#(8)Função que retorna os três artistas que mais apareceram na planilha
+#E por fim, cria um dataframe com o nome desses artistas e total de vendas de cada um
+#A função pega um array de artistas, sem repetição, e depois percorre o dataframe original,
+#para verificar quantas vezes cada artista a pareceu no dataframe original e,
+#armazena essa quantidade em uma variavel auxiliar, depois apenas comparamos se essa quantide é maior que a
+#quantidade das variáveis principais, se for substituimos o valor da variável principal pela auxiliar
+#A função retorna um array (com os nomes dos três artistas), para criar o dataframe verificamos o total de
+#vendas de ca um e guardamos essas informações um array, por fim geramos o dataframe.
 quest8 <- function(){
   primeiro = ""
   primeiroAux = 0
-  primeiroVendas = 0
   segundo = ""
   segundoAux = 0
-  segundoVendas = 0
   terceiro = ""
   terceiroAux = 0
-  terceiroVendas = 0
   artistasAux <- unique(dframe$Artista)
   for(i in 1:length(artistasAux)){
     auxQnt = 0
-    auxVendas = 0
     for(j in 1:length(dframe$Artista)){
       if(artistasAux[i] == dframe$Artista[j]){
         auxQnt = auxQnt + 1
-        auxVendas = auxVendas + dframe$Qnt..de.Albuns.Vendidos[j]
       }
     }
     if(auxQnt > primeiroAux){
       terceiro = segundo
       terceiroAux = segundoAux
-      terceiroVendas = segundoVendas
       segundo = primeiro
       segundoAux = primeiroAux
-      segundoVendas = primeiroVendas
       primeiro = dframe$Artista[i]
       primeiroAux = auxQnt
-      primeiroVendas = auxVendas
     } else if(auxQnt > segundoAux){
       terceiro = segundo
       terceiroAux = segundoAux
-      terceiroVendas = segundoVendas
       segundo = dframe$Artista[i]
       segundoAux = auxQnt
-      segundoVendas = auxVendas
     } else if(auxQnt > terceiroAux){
       terceiro = dframe$Artista[i]
       terceiroAux = auxQnt
-      terceiroVendas = auxVendas
     }
   }
-  ARTISTA = c(as.character(primeiro), as.character(segundo), as.character(terceiro))
-  TOTAL_DE_VENDAS = c(primeiroVendas, segundoVendas, terceiroVendas)
-  dframe8 <- data.frame(ARTISTA, TOTAL_DE_VENDAS)
-  return(dframe8)
+  res <- c(as.character(primeiro), as.character(segundo), as.character(terceiro))
+  return(res)
 }
-print(quest8())
 
-#(9) 
+artistas8 <- quest8()
+totalVendas <- rep(0, 3)
+for(i in 1:3){
+  auxVendas = 0
+  for(j in 1:41){
+    if(artistas8[i] == dframe$Artista[j]){
+      auxVendas = auxVendas + dframe$Qnt..de.Albuns.Vendidos[j]
+    }
+  }
+  totalVendas[i] = auxVendas
+}
+
+ARTISTA <- artistas8 
+TOTAL_DE_VENDAS <- totalVendas
+dframe8 <- data.frame(ARTISTA, TOTAL_DE_VENDAS)
+print(dframe8)
+
+#(9) Função que retorne o nome do Álbum que mais vendeu de cada empresa e fazer um dataframe com
+# as colunas "EMPRESA", "ARTISTA", "ÁLBUM" e "VENDAS", mostrando o álbum mais vendido de cada empresa
+# por ordem decrescente.
+# Iniciamos a função "quest9()" com um vetor "Empresas0" que pega o nome de todas as empresas, mas sem 
+# repetição, e iniciamos um outro vetor "MaiorAlbumEmp" com a função "rep()", para que ele tenha o 
+# mesmo tamanho de "Empresas0", além disso criamos um vetor vazio "AlbumEmp". Com dois "fors" procuramos
+# na tabela original qual o maior número de álbuns vendidos por cada empresa e guardamos essa informação
+# no vetor "MaiorAlbumEmp" e aproveitamos tamb´me para guardar o nome do álbum no vetor "AlbumEmp".
+# Depois retornamos a o vetor "AlbumEmp" no fim da função. Posteriormente, já fora da função, criamos
+# vetor "vetorAlbuns" que recebe a função "quest9()" e um outro vetor "MaiorArtistaEmp". Com o vetor
+# "vetorAlbuns" e dois "fors" enchemos os vetores "MaiorAlbumEmp" e "MaiorArtistaEmp" com, respectivamente, 
+# a maior quantidade de álbuns vendidos e o artista do álbum mais vendido, de cada empresa. Depois
+# geramos um dataframe e um outro "Auxiliar" que é sua cópia. Por fim, usando com o comando "order"
+# e a cópia ("Auxiliar") do dataframe original, ordenamos de manira decrescente o dataframe auxiliar
+# e ao fim o copiamos de volta para o otiginal.
 quest9 <- function(){
-  MaiorAlbumEmp <- rep(0, 18)
-  MaiorArtistaEmp <- " "
-  AlbumEmp <- " "
+  Empresas0 <- unique(dframe$Empresa)
+  MaiorAlbumEmp <- rep(0, length(Empresas0))
+  
+  AlbumEmp <- NULL
   for (i in 1:length(Empresas0)) {
     for (y in 1:41) {
       if (Empresas0[i] == (dframe$Empresa[y])) {
         if (MaiorAlbumEmp[i] < dframe$Qnt..de.Albuns.Vendidos[y]) {
-          MaiorAlbumEmp[i] <- c(dframe$Qnt..de.Albuns.Vendidos[y])
-          MaiorArtistaEmp[i] <- as.character(dframe$Artista[y])
+          MaiorAlbumEmp[i] <- dframe$Qnt..de.Albuns.Vendidos[y]
           AlbumEmp[i] <- as.character(dframe$Album[y])
         }
       }
     }
   }
-  DFEmpresaAlbum <- data.frame(
-    EMPRESA = Empresas0 ,
-    ARTISTA = MaiorArtistaEmp ,
-    ALBUM = AlbumEmp ,
-    Qnt.deVendas = MaiorAlbumEmp
-  )
-  Auxiliar <- DFEmpresaAlbum
-  ordem <- order(DFEmpresaAlbum$Qnt.deVendas, decreasing = TRUE)
-  for (i in 1:length(ordem)) {
-    Auxiliar$EMPRESA[i] <- DFEmpresaAlbum$EMPRESA[ordem[i]]
-    Auxiliar$ARTISTA[i] <- DFEmpresaAlbum$ARTISTA[ordem[i]]
-    Auxiliar$ALBUM[i] <- DFEmpresaAlbum$ALBUM[ordem[i]]
-    Auxiliar$Qnt.deVendas[i] <- DFEmpresaAlbum$Qnt.deVendas[ordem[i]]
-  }
-  return(Auxiliar)
+  return(AlbumEmp)
 }
-print(quest9())
 
+vetorAlbuns <- quest9()
 
-#(10)
-QntEm2018 <- NULL
-QntEm2019 <- NULL
-x = 0
-for (i in 1:length(Empresas0)) {
-  for (y in 1:length(artistas18)) {
-    if (Empresas0[i] == dframe$Empresa[y]) {
-      x = x + 1
+Empresas0 <- unique(dframe$Empresa)
+MaiorAlbumEmp <- rep(0, 18)
+MaiorArtistaEmp <- " "
+for(i in 1:length(vetorAlbuns)){
+  for(j in 1:length(dframe$Album)){
+    if(vetorAlbuns[i] == dframe$Album[j]){
+      MaiorAlbumEmp[i] <- c(dframe$Qnt..de.Albuns.Vendidos[j])
+      MaiorArtistaEmp[i] <- as.character(dframe$Artista[j])
     }
   }
-  QntEm2018[i] <- c(x)
-  x = 0
 }
-x = 0
-for (i in 1:length(Empresas0)) {
-  for (y in 23:41) {
-    if (Empresas0[i] == dframe$Empresa[y]) {
-      x = x + 1
-    }
-  }
-  QntEm2019[i] <- c(x)
-  x = 0
-}
-DFEmpresaAno <- data.frame(
+
+DFEmpresaAlbum <- data.frame(
   EMPRESA = Empresas0 ,
-  Ano2018 = QntEm2018 ,
-  Ano2019 = QntEm2019
+  ARTISTA = MaiorArtistaEmp ,
+  ÁLBUM = vetorAlbuns ,
+  VENDAS = MaiorAlbumEmp
 )
-hist(DFEmpresaAno$Ano2018, main = "Álbuns lançados em 2018", col = "red")
-hist(DFEmpresaAno$Ano2019, main = "Álbuns lançados em 2019", col = "blue")
+
+Auxiliar <- DFEmpresaAlbum
+ordem <- order(DFEmpresaAlbum$VENDAs, decreasing = TRUE)
+for (i in 1:length(ordem)) {
+  Auxiliar$EMPRESA[i] <- DFEmpresaAlbum$EMPRESA[ordem[i]]
+  Auxiliar$ARTISTA[i] <- DFEmpresaAlbum$ARTISTA[ordem[i]]
+  Auxiliar$ÁLBUM[i] <- DFEmpresaAlbum$ÁLBUM[ordem[i]]
+  Auxiliar$VENDAS[i] <- DFEmpresaAlbum$VENDAS[ordem[i]]
+}
+DFEmpresaAlbum <- Auxiliar
+
+print(DFEmpresaAlbum)
+
+
+#(10) Função que recebe um nome de uma empresa e retorna um histograma com a frenquência de lançamentos de álbuns
+#Para construirmos o histograma usamos a função hist, o histograma mostra a frenquência de lançamendos de álbuns
+#nos anos de 2018 e 2019, para isso passamos um como argumendo da função hist, um array com os anos em que a 
+#empresa lançou algum álbum.
+quest10 <- function(empresa){
+  anos <- NULL
+  pos <- 1
+  for(i in 1:length(dframe$Empresa)){
+    if(dframe$Empresa[i] == empresa){ 
+      anos[pos] <- dframe$Ano[i]
+      pos = pos + 1
+    }
+  }
+  if(length(anos) >= 1){
+    hist(anos, main = c("Empresa:", empresa), col = c("darkblue", "blue"), border = "black",xlim = c(2016,2021),breaks = 2, xlab = "Anos", ylab = "Frequência de álbuns lançados")  
+  } else {
+    print("Erro: Empresa inválida !")
+  }
+}
+quest10("SM")
