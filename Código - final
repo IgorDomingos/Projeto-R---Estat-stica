@@ -1,7 +1,7 @@
 # Igor Domingos da Rocha e Silva - idrs / José Henrique Fernandes Silva - jhfs
 #(1)Baixar a planilha: 
 #Baixamos a planiha utilizando o comando "read.csv()"
-dados <- read.csv("C:\\Users\\jhfs\\Downloads\\Detalhes de Albuns - Página1.csv")
+dados <- read.csv("C:\\Users\\idrs\\Downloads\\Detalhes de Albuns - Página1.csv")
 dframe <- data.frame(dados)
 
 #(2) Calcular média, desvio padrão e moda da "Quantidade de Álbuns vendidos"
@@ -40,6 +40,7 @@ for (i in 2:length(QntAlbuns)) {
   if (aux < quantVezes[i]) {
     moda = QntAlbuns[i]
     mod = 1
+    aux = quantVezes[i]
   }
 }
 if(mod == 1){ 
